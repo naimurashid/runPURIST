@@ -1,12 +1,15 @@
 #' @export
 server <- function(input, output){
   
+  
+  volumes = shinyFiles::getVolumes()
   shinyDirChoose(
     input,
     'dir',
-    roots = c(wd = "C:" ),
+    roots = volumes,
     filetypes = c('RCC', 'rcc')
   )
+  
   
   
   
@@ -14,7 +17,7 @@ server <- function(input, output){
     
     if(is.null(input$dir)) return(NULL)
     inFile <- input$dir
-    datapath <- parseDirPath(c(wd = "C:"), input$dir)
+    datapath <- parseDirPath(volumes, input$dir)
     
     #data <- read.csv(inFile$datapath, header = TRUE)
     #data
@@ -27,7 +30,7 @@ server <- function(input, output){
     inFile <- input$dir
     if (is.null(inFile)) return(NULL)
     
-    datapath <- parseDirPath(c(wd = "C:"), input$dir)
+    datapath <- parseDirPath(volumes, input$dir)
     
     #data <- read.csv(inFile$datapath, header = TRUE)
     #data
