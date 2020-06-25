@@ -2,7 +2,7 @@
 server <- function(input, output){
   
   
-  volumes = shinyFiles::getVolumes()
+  volumes = shinyFiles::getVolumes()()
   shinyDirChoose(
     input,
     'dir',
@@ -17,6 +17,7 @@ server <- function(input, output){
     
     if(is.null(input$dir)) return(NULL)
     inFile <- input$dir
+    print(volumes)
     datapath <- parseDirPath(volumes, input$dir)
     
     #data <- read.csv(inFile$datapath, header = TRUE)
