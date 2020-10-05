@@ -39,6 +39,9 @@ server <- function(input, output){
     mat = data.matrix(dat[,-c(1:3)])
     rownames(mat) = as.matrix(dat[,2])
     
+    # get date of run.  If more than one date, take the earliest one
+    date = as.character(unique(rcc$exp$nanostring.date)[1])
+    
     # pass metric
     genetsp = mat[rownames(mat) %in% classifs[[1]]$TSPs,]
     sub = apply_classifier(data = genetsp,classifier = classifs[[1]])
@@ -50,7 +53,7 @@ server <- function(input, output){
     
     
     out = apply_classifier(data = mat, classifier = classifs[[1]])
-    output.path = sprintf("%s/results_of_purist_by_nanostring.csv", datapath)
+    output.path = sprintf("%s/results_of_purist_by_nanostring_%s.csv", datapath, date)
     #print(output.path)
     
     # not outputting pass yet
