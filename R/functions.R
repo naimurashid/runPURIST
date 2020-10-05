@@ -50,23 +50,10 @@ apply_classifier = function(data, classifier){
   Subtype_graded = grades[Subtype_graded]
   
   # final matrix
-  final = data.frame(Pred_prob_basal= Pred_prob_basal, Subtype = Subtype, Subtype_graded = Subtype_graded)
+  final = data.frame(Pred_prob_basal= round(Pred_prob_basal,3), Subtype = Subtype, Subtype_graded = Subtype_graded)
   rownames(final) = make.names(colnames(data), unique = any(table(colnames(data)) > 1) )
   
   return(final)
-}
-ind_fun = function(train_sub, classifier){
-  indmat = matrix(-1, ncol(train_sub), nrow(classifier$TSPs))
-  for(i in 1:nrow(classifier$TSPs)){
-    p1 = which(rownames(train_sub) == classifier$TSPs[i,1])
-    p2 = which(rownames(train_sub) == classifier$TSPs[i,2])
-    if(length(p1) == 0) stop(sprintf("%s is not found in input matrix rownames",classifier$TSPs[i,1]))
-    if(length(p2) == 0) stop(sprintf("%s is not found in input matrix rownames",classifier$TSPs[i,2]))
-    indmat[,i] = (train_sub[p1,] > train_sub[p2,])^2
-  }
-  indmat = t(indmat)
-  colnames(indmat) = colnames(train_sub)
-  return(indmat)
 }
 
 # compare within TSP expression for a given matrix of samples
