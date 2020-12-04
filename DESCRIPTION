@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "first.last@example.com",
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Depends: nanostringr, shiny, shinyFiles, DT, pheatmap
+Depends: nanostringr, shiny, shinyFiles, DT
 Description: What the package does (one paragraph).
 License: What license it uses
 Encoding: UTF-8
